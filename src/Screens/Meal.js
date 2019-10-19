@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import CategoryItem from '../Components/CategoryItem';
-import { fetchByCategory } from '../utils/ApiHelper';
+import { fetchByMealId } from '../utils/ApiHelper';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import AnimatedContainer from '../Components/AnimatedContainer';
-import MealItem from 'Components/MealItem';
 
 const StyledContainer = styled(Container)`
     align-content: center;
@@ -26,44 +23,49 @@ const HeaderContainer = styled.div`
 	}
 `;
 
-const Category = ({categoryName}) => {
-	const [ meals, setMeals ] = useState([]);
+const Meal = ({mealId}) => {
+	const [ meal, setMeal ] = useState(null);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const data = await fetchByCategory(categoryName);
-			setMeals(data);
+			const data = await fetchByMealId(mealId);
+			setMeal(data[0]);
 		};
 		fetchData();
-	}, [categoryName]);
+	}, [mealId]);
 
+	console.log(meal);
 	return (
         <>
 			<HeaderContainer>
 				<Container>
-					<Link to={'/'}>
+					<Link to={`/category/${meal && meal.category}`}>
 						<Typography variant="h6" gutterBottom>
 							Back
 						</Typography>
 					</Link>
 					<Typography variant="h4" gutterBottom>
-						Here Are Some Great <strong>{categoryName}</strong> Recipes
+						<strong>{mealId}</strong>
 					</Typography>
 				</Container>
 			</HeaderContainer>
 			<StyledContainer>
 				<Grid container spacing={6}>
-					{meals.map((meal, i) => (
-						<Grid item lg={3} md={4} xs={6} key={meal.mealId}>
-							<AnimatedContainer index={i}>
-								<MealItem {...meal} />
-							</AnimatedContainer>
-						</Grid>
-					))}
+					{meal && (
+						<>
+							<img src={meal.thumbnail} alt={meal.name}/>
+							<ul>
+								{meal.ingredients.map((ing, i) => (
+									<li key={i}>{ing.ingredient} | {ing.measurement}</li>
+								))}
+							</ul>
+							<p>{meal.instructions}</p>
+						</>
+					)}
 				</Grid>
 			</StyledContainer>
         </>
 	);
 };
 
-export default Category;
+export default Meal;

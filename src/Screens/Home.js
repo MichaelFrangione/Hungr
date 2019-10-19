@@ -5,6 +5,7 @@ import {fetchCategories} from '../utils/ApiHelper';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import AnimatedContainer from '../Components/AnimatedContainer';
 
 const StyledContainer = styled(Container)`
     align-content: center;
@@ -29,6 +30,7 @@ const Home = () => {
 		fetchData();
 	}, []);
 
+
 	return (
         <>
             <HeaderContainer>
@@ -43,9 +45,11 @@ const Home = () => {
             </HeaderContainer>
             <StyledContainer>
                 <Grid container spacing={6}>
-                    {categories.map((category) => (
+                    {categories.map((category, i) => (
                         <Grid item lg={3} md={4} xs={6} key={category.categoryId}>
-                            <CategoryItem {...category} />
+                            <AnimatedContainer index={i}>
+                                <CategoryItem {...category} />
+                            </AnimatedContainer>
                         </Grid>
                     ))}
                 </Grid>

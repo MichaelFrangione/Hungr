@@ -37,7 +37,7 @@ const Container = styled.div`
 const MealItem = ({ name, thumbnail, index, mealId }) => {
   return (
     <Container index={index}>
-      <Link to={`/meal/${name}`}>
+      <Link to={`/meal/${mealId}`}>
         <img src={thumbnail} alt={name} />
         <Typography variant="h4" gutterBottom>
           {name}

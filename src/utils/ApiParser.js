@@ -45,5 +45,5 @@ export const parseMeals = resp => {
 };
 
 const parseTags = tags => {
-  return tags.split(",");
+  return tags && tags.split(",");
 };

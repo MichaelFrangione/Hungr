@@ -7,6 +7,8 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import IngredientsList from "Components/IngredientsList/IngredientsList";
 import Video from "Components/Video/Video";
+import Flag from "react-world-flags";
+import { countryMappings as COUNTRY_MAPPINGS } from "../Constants";
 
 const VideoContainer = styled.div`
   width: 100%;
@@ -19,6 +21,10 @@ const StyledContainer = styled(Container)`
 
   p {
     font-size: 1.5rem;
+  }
+
+  a {
+    text-decoration: none;
   }
 `;
 
@@ -46,6 +52,23 @@ const MetadataContainer = styled.div`
   padding: 32px;
 `;
 
+const FlagContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 32px;
+`;
+
+const StyledFlag = styled(Flag)`
+  margin-left: 20px;
+  max-width: 120px;
+`;
+
+const Tag = styled.span`
+  color: #f5365c;
+`;
+
 const Meal = ({ mealId }) => {
   const [meal, setMeal] = useState(null);
 
@@ -68,7 +91,7 @@ const Meal = ({ mealId }) => {
             </Typography>
           </Link>
           <Typography variant="h4" gutterBottom>
-            <strong>{mealId}</strong>
+            <strong>{meal && meal.name}</strong>
           </Typography>
         </Container>
       </HeaderContainer>
@@ -77,25 +100,39 @@ const Meal = ({ mealId }) => {
           {meal && (
             <>
               <MenuHeaderContainer container spacing={0}>
-                <Grid item sm={8} xs={12}>
+                <Grid item md={8} xs={12}>
                   <VideoContainer>
                     <Video {...meal}></Video>
                   </VideoContainer>
                 </Grid>
                 <Grid item sm={4} xs={12}>
                   <MetadataContainer>
-                    <Typography variant="h4" gutterBottom>
-                      Origin: {meal.country}
+                    <FlagContainer>
+                      <Typography variant="h5" gutterBottom>
+                        {meal.country}
+                      </Typography>
+                      <StyledFlag
+                        code={COUNTRY_MAPPINGS[meal.country]}
+                        fallback={<span>{meal.country}</span>}
+                      />
+                    </FlagContainer>
+                    <Typography variant="h3" gutterBottom>
+                      <strong>{meal.name}</strong>
                     </Typography>
                     <Typography variant="h4" gutterBottom>
                       Category: {meal.category}
                     </Typography>
-                    <Typography variant="h4" gutterBottom>
-                      Tags:{" "}
-                      {meal.tags.map(tag => (
-                        <span key={tag}>{tag}&nbsp;</span>
-                      ))}
-                    </Typography>
+                    {meal.tags && (
+                      <Typography variant="h5" gutterBottom>
+                        Tags:&nbsp;
+                        {meal.tags.map((tag, i) => (
+                          <Tag>
+                            {tag}
+                            {i < meal.tags.length - 1 && ", "}
+                          </Tag>
+                        ))}
+                      </Typography>
+                    )}
                   </MetadataContainer>
                 </Grid>
               </MenuHeaderContainer>
@@ -108,9 +145,12 @@ const Meal = ({ mealId }) => {
                   <Typography variant="h4" gutterBottom>
                     Directions
                   </Typography>
-                  <Typography variant="body1" gutterBottom>
-                    {meal.instructions}
-                  </Typography>
+                  <Typography
+                    variant="body1"
+                    gutterBottom
+                    style={{ whiteSpace: "pre-wrap" }}
+                    dangerouslySetInnerHTML={{ __html: meal.instructions }}
+                  />
                 </Grid>
               </Grid>
             </>

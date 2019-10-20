@@ -48,8 +48,12 @@ const YoutubeContainer = styled(YouTube)`
   height: 600px;
 `;
 
-const Video = ({ name, thumbnail, index, mealId, youtube }) => {
+const Video = ({ name, thumbnail, hideVideo, youtube }) => {
   const [showVideo, setShowVideo] = useState(false);
+
+  if (hideVideo) {
+    return <ImageOverlay src={thumbnail} alt={name} />;
+  }
 
   const videoId = getVideoId(youtube);
 

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import WorldFlag from "react-world-flags";
 import { countryMappings as COUNTRY_MAPPINGS } from "../../Constants";
 
@@ -14,6 +15,10 @@ const Flag = ({ country, ...others }) => {
       {...others}
     />
   );
+};
+
+Flag.propTypes = {
+  country: PropTypes.string
 };
 
 export default Flag;

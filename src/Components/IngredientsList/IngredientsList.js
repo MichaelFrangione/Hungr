@@ -1,6 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
+import { IngredientsType } from "Components/Types";
 
 const IngredientsContainer = styled.ul`
   list-style: none;
@@ -37,6 +39,10 @@ const IngredientsList = ({ ingredients }) => {
       </IngredientsContainer>
     </Container>
   );
+};
+
+IngredientsList.propTypes = {
+  ingredients: PropTypes.arrayOf(IngredientsType)
 };
 
 export default IngredientsList;

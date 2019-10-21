@@ -1,7 +1,6 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { uniq as _uniq } from "lodash";
 import Home from "./Screens/Home";
 import Category from "Screens/Category";
 import Meal from "Screens/Meal";

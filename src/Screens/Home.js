@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import CategoryItem from "../Components/CategoryItem";
+import GridItem from "../Components/GridItem";
 import {
   fetchCategories,
   fetchRandomMeal,
@@ -14,6 +14,7 @@ import Carousel from "Components/Carousel";
 import SectionDivider from "Components/SectionDivider";
 import { useStateValue } from "../Providers/StateProvider";
 import Header from "Components/Header";
+import MealInfo from "Components/MealInfo";
 
 const StyledContainer = styled(Container)`
   min-height: 150px;
@@ -67,7 +68,11 @@ const Home = () => {
       />
       {randomRecipes && (
         <RandomRecipe>
-          <Carousel slides={randomRecipes} />
+          <Carousel
+            slides={randomRecipes.map((el, i) => (
+              <MealInfo meal={el} isCarousel key={i} />
+            ))}
+          />
         </RandomRecipe>
       )}
       <SectionDivider
@@ -81,7 +86,7 @@ const Home = () => {
             {favoritesList.map((favorite, i) => (
               <Grid item lg={3} md={4} xs={6} key={favorite.mealId}>
                 <AnimatedContainer index={i}>
-                  <CategoryItem
+                  <GridItem
                     {...favorite}
                     linkToUrl={`/meal/${favorite.mealId}`}
                   />
@@ -105,7 +110,7 @@ const Home = () => {
           {categories.map((category, i) => (
             <Grid item lg={3} md={4} xs={6} key={category.categoryId}>
               <AnimatedContainer index={i}>
-                <CategoryItem
+                <GridItem
                   {...category}
                   linkToUrl={`/category/${category.name}`}
                 />

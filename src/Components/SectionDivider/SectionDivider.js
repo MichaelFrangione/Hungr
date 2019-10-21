@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -27,5 +28,11 @@ const SectionDivider = ({ heading, subHeading, backgroundColor }) => (
     </Container>
   </HeaderContainer>
 );
+
+SectionDivider.propTypes = {
+  heading: PropTypes.string,
+  subHeading: PropTypes.string,
+  backgroundColor: PropTypes.string
+};
 
 export default SectionDivider;

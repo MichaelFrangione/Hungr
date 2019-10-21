@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -11,11 +12,14 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { useStateValue } from "../../Providers/StateProvider";
 import { addFavorite, removeFavorite } from "../../utils/Middlewares";
+import { MealItemType } from "Components/Types";
+
+const BREAKPOINT = 860;
 
 const MenuHeaderContainer = styled(Grid)`
   background: #172b4d;
-  height: 600px;
   display: flex !important;
+  height: 600px;
 
   a {
     text-decoration: none;
@@ -34,6 +38,21 @@ const MetadataContainer = styled.div`
   text-align: left;
   padding: 32px;
   position: relative;
+
+  @media (max-width: ${BREAKPOINT}px) {
+    padding: 16px;
+    h3 {
+      font-size: 1.8em;
+    }
+
+    h4 {
+      font-size: 1.4em;
+    }
+
+    h5 {
+      font-size: 1.2em;
+    }
+  }
 `;
 
 const FlagContainer = styled.div`
@@ -42,11 +61,21 @@ const FlagContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
   margin-bottom: 32px;
+
+  @media (max-width: ${BREAKPOINT}px) {
+    h5 {
+      display: none;
+    }
+  }
 `;
 
 const StyledFlag = styled(Flag)`
   margin-left: 20px;
   max-width: 120px;
+
+  @media (max-width: ${BREAKPOINT}px) {
+    max-width: 80px;
+  }
 `;
 
 const Tag = styled.span`
@@ -58,6 +87,14 @@ const StyledButton = styled(Button)`
   bottom: 32px;
   right: 32px;
   text-transform: none !important;
+
+  @media (max-width: ${BREAKPOINT}px) {
+    bottom: 16px;
+    right: 16px;
+    h5 {
+      font-size: 0.8em;
+    }
+  }
 `;
 
 const StyledFab = styled(Fab)`
@@ -73,12 +110,12 @@ const MealInfo = ({ meal, isCarousel, ...others }) => {
   const isFavorited = state.favorites && state.favorites.includes(meal.mealId);
   return (
     <MenuHeaderContainer container spacing={0} {...others}>
-      <Grid item md={8} xs={12}>
+      <Grid item xs={8}>
         <VideoContainer>
           <Video hideVideo={isCarousel} {...meal}></Video>
         </VideoContainer>
       </Grid>
-      <Grid item sm={4} xs={12}>
+      <Grid item xs={4}>
         <MetadataContainer>
           <FlagContainer>
             <Typography variant="h5" gutterBottom>
@@ -116,7 +153,9 @@ const MealInfo = ({ meal, isCarousel, ...others }) => {
               onClick={() => addFavorite(meal.mealId, state, dispatch)}
             >
               <FavoriteBorderIcon />
-              <Typography variant="h5">&nbsp;Add to Favorites</Typography>
+              <Typography variant="h5">
+                {window.innerWidth >= BREAKPOINT && ` Add to Favorites`}
+              </Typography>
             </StyledFab>
           ) : (
             <StyledFab
@@ -125,13 +164,21 @@ const MealInfo = ({ meal, isCarousel, ...others }) => {
               onClick={() => removeFavorite(meal.mealId, state, dispatch)}
             >
               <FavoriteIcon />
-              <Typography variant="h5">&nbsp;Remove from Favorites</Typography>
+              <Typography variant="h5">
+                {window.innerWidth >= BREAKPOINT && ` Remove from Favorites`}
+              </Typography>
             </StyledFab>
           )}
         </MetadataContainer>
       </Grid>
     </MenuHeaderContainer>
   );
+};
+
+MealInfo.propTypes = {
+  /* Used to determing if it should show video and view recipe / favorites */
+  isCarousel: PropTypes.bool,
+  meal: MealItemType
 };
 
 export default MealInfo;

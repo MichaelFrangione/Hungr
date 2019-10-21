@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
@@ -45,6 +46,10 @@ const CategoryItem = ({ name, thumbnail, linkToUrl }) => {
       </Link>
     </Container>
   );
+};
+
+CategoryItem.propTypes = {
+  linkToUrl: PropTypes.string
 };
 
 export default CategoryItem;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import { getVideoId } from "../../utils/Youtube";
@@ -84,6 +85,11 @@ const Video = ({ name, thumbnail, hideVideo, youtube }) => {
       </VideoContainer>
     </Container>
   );
+};
+
+Video.propTypes = {
+  /* will only render the thumbnail image is true */
+  hideVideo: PropTypes.bool
 };
 
 export default Video;

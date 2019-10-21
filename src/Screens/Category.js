@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import AnimatedContainer from "../Components/AnimatedContainer";
-import MealItem from "Components/MealItem";
+import GridItem from "Components/GridItem";
 
 const StyledContainer = styled(Container)`
   align-content: center;
@@ -55,7 +55,7 @@ const Category = ({ categoryName }) => {
           {meals.map((meal, i) => (
             <Grid item lg={3} md={4} xs={6} key={meal.mealId}>
               <AnimatedContainer index={i}>
-                <MealItem {...meal} />
+                <GridItem {...meal} linkToUrl={`/meal/${meal.mealId}`} />
               </AnimatedContainer>
             </Grid>
           ))}

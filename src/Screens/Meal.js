@@ -5,7 +5,7 @@ import { fetchByMealId } from "../utils/ApiHelper";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import IngredientsList from "Components/IngredientsList/IngredientsList";
+import IngredientsList from "Components/IngredientsList";
 import MealInfo from "Components/MealInfo";
 
 const StyledContainer = styled(Container)`

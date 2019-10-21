@@ -18,7 +18,7 @@ const StyledLocalPizzaIcon = styled(LocalPizzaIcon)`
   font-size: 7em !important;
   color: #fb6340;
 `;
-const Header = ({ country, ...others }) => {
+const Header = () => {
   return (
     <AppHeader>
       <StyledLocalPizzaIcon />

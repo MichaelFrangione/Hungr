@@ -13,7 +13,7 @@ import AnimatedContainer from "../Components/AnimatedContainer";
 import Carousel from "Components/Carousel";
 import SectionDivider from "Components/SectionDivider";
 import { useStateValue } from "../Providers/StateProvider";
-import LocalPizzaIcon from "@material-ui/icons/LocalPizza";
+import Header from "Components/Header";
 
 const StyledContainer = styled(Container)`
   min-height: 150px;
@@ -26,22 +26,6 @@ const RandomRecipe = styled.div`
   background: #172b4d;
   margin-bottom: 32px;
   overflow: hidden;
-`;
-
-const AppHeader = styled.div`
-  padding: 64px;
-  text-align: center;
-
-  span {
-    font-weight: bold;
-    color: #5e72e4;
-  }
-`;
-
-const StyledLocalPizzaIcon = styled(LocalPizzaIcon)`
-  margin-bottom: 16px;
-  font-size: 7em !important;
-  color: #fb6340;
 `;
 
 const Home = () => {
@@ -75,16 +59,7 @@ const Home = () => {
 
   return (
     <>
-      <AppHeader>
-        <StyledLocalPizzaIcon />
-
-        <Typography variant="h3" gutterBottom>
-          WELCOME TO <span>HUNGR</span>
-        </Typography>
-        <Typography variant="h4">
-          Your mealDb powered solution to an empty stomach.
-        </Typography>
-      </AppHeader>
+      <Header />
       <SectionDivider
         backgroundColor="#8965e0"
         heading="Looking to try something new?"

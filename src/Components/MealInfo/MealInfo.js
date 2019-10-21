@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { useStateValue } from "../../Providers/StateProvider";
+import { addFavorite, removeFavorite } from "../../utils/Middlewares";
 
 const MenuHeaderContainer = styled(Grid)`
   background: #172b4d;
@@ -67,9 +68,9 @@ const StyledFab = styled(Fab)`
 `;
 
 const MealInfo = ({ meal, isCarousel, ...others }) => {
-  const [{ favorites }, dispatch] = useStateValue();
+  const [state, dispatch] = useStateValue();
 
-  const isFavorited = favorites && favorites.includes(meal.mealId);
+  const isFavorited = state.favorites && state.favorites.includes(meal.mealId);
   return (
     <MenuHeaderContainer container spacing={0} {...others}>
       <Grid item md={8} xs={12}>
@@ -112,12 +113,7 @@ const MealInfo = ({ meal, isCarousel, ...others }) => {
             <StyledFab
               variant="extended"
               color="secondary"
-              onClick={() =>
-                dispatch({
-                  type: "addToFavorites",
-                  id: meal.mealId
-                })
-              }
+              onClick={() => addFavorite(meal.mealId, state, dispatch)}
             >
               <FavoriteBorderIcon />
               <Typography variant="h5">&nbsp;Add to Favorites</Typography>
@@ -126,12 +122,7 @@ const MealInfo = ({ meal, isCarousel, ...others }) => {
             <StyledFab
               variant="extended"
               color="secondary"
-              onClick={() =>
-                dispatch({
-                  type: "removeFromFavorites",
-                  id: meal.mealId
-                })
-              }
+              onClick={() => removeFavorite(meal.mealId, state, dispatch)}
             >
               <FavoriteIcon />
               <Typography variant="h5">&nbsp;Remove from Favorites</Typography>

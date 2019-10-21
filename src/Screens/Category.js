@@ -25,7 +25,7 @@ const HeaderContainer = styled.div`
   }
 `;
 
-const Category = ({ categoryName }) => {
+const Category = ({ categoryName, description }) => {
   const [meals, setMeals] = useState([]);
 
   useEffect(() => {
@@ -40,13 +40,11 @@ const Category = ({ categoryName }) => {
     <>
       <HeaderContainer>
         <Container>
-          <Link to={"/"}>
-            <Typography variant="h6" gutterBottom>
-              Back
-            </Typography>
-          </Link>
           <Typography variant="h4" gutterBottom>
             Here Are Some Great <strong>{categoryName}</strong> Recipes
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            {description}
           </Typography>
         </Container>
       </HeaderContainer>

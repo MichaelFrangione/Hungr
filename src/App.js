@@ -27,9 +27,14 @@ function App() {
           <Switch>
             <Route
               path="/category/:id"
-              render={props => (
-                <Category categoryName={props.match.params.id} />
-              )}
+              render={props => {
+                return (
+                  <Category
+                    categoryName={props.match.params.id}
+                    description={props.location.state.description}
+                  />
+                );
+              }}
             />
             <Route
               path="/meal/:id"

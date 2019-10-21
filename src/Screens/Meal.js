@@ -53,11 +53,6 @@ const Meal = ({ mealId }) => {
     <>
       <HeaderContainer>
         <Container>
-          <Link to={`/category/${meal && meal.category}`}>
-            <Typography variant="h6" gutterBottom>
-              Back
-            </Typography>
-          </Link>
           <Typography variant="h4" gutterBottom>
             <strong>{meal && meal.name}</strong>
           </Typography>

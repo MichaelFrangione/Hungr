@@ -10,7 +10,7 @@ export const countryMappings = {
   Indian: 356,
   Irish: 372,
   Italian: 380,
-  Jamaican: 372,
+  Jamaican: 388,
   Japanese: 392,
   Kenyan: 404,
   Malaysian: 458,

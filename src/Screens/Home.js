@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import CategoryItem from "../Components/CategoryItem";
-import { fetchCategories, fetchRandomMeal } from "../utils/ApiHelper";
+import {
+  fetchCategories,
+  fetchRandomMeal,
+  fetchFavorites
+} from "../utils/ApiHelper";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import AnimatedContainer from "../Components/AnimatedContainer";
 import Carousel from "Components/Carousel";
+import SectionDivider from "Components/SectionDivider";
+import { useStateValue } from "../Providers/StateProvider";
+import LocalPizzaIcon from "@material-ui/icons/LocalPizza";
 
 const StyledContainer = styled(Container)`
+  min-height: 150px;
   align-content: center;
   justify-content: center;
-`;
-
-const HeaderContainer = styled.div`
-  background: #5e72e4;
-  padding: 50px 0 10px 0;
-  margin-bottom: 60px;
-  color: white;
+  margin: 32px 0;
 `;
 
 const RandomRecipe = styled.div`
@@ -26,9 +28,27 @@ const RandomRecipe = styled.div`
   overflow: hidden;
 `;
 
+const AppHeader = styled.div`
+  padding: 64px;
+  text-align: center;
+
+  span {
+    font-weight: bold;
+    color: #5e72e4;
+  }
+`;
+
+const StyledLocalPizzaIcon = styled(LocalPizzaIcon)`
+  margin-bottom: 16px;
+  font-size: 7em !important;
+  color: #fb6340;
+`;
+
 const Home = () => {
   const [categories, setCategories] = useState([]);
   const [randomRecipes, setRandomRecipes] = useState([]);
+  const [favoritesList, setfavoritesList] = useState([]);
+  const [{ favorites }] = useStateValue();
 
   useEffect(() => {
     const fetchCategoryList = async () => {
@@ -45,39 +65,75 @@ const Home = () => {
     fetchCategoryList();
   }, []);
 
+  useEffect(() => {
+    const fetchFavoritesList = async () => {
+      const data = await fetchFavorites(favorites);
+      setfavoritesList(data);
+    };
+    fetchFavoritesList();
+  }, [favorites]);
+
   return (
     <>
-      <HeaderContainer>
-        <Container>
-          <Typography variant="h6" gutterBottom>
-            &nbsp;
-          </Typography>
-          <Typography variant="h4" gutterBottom>
-            Looking for something new to try?
-          </Typography>
-        </Container>
-      </HeaderContainer>
+      <AppHeader>
+        <StyledLocalPizzaIcon />
+
+        <Typography variant="h3" gutterBottom>
+          WELCOME TO <span>HUNGR</span>
+        </Typography>
+        <Typography variant="h4">
+          Your mealDb powered solution to an empty stomach.
+        </Typography>
+      </AppHeader>
+      <SectionDivider
+        backgroundColor="#8965e0"
+        heading="Looking to try something new?"
+        subHeading="Heres a few of our most popular meals"
+      />
       {randomRecipes && (
         <RandomRecipe>
           <Carousel slides={randomRecipes} />
         </RandomRecipe>
       )}
-      <HeaderContainer>
-        <Container>
-          <Typography variant="h6" gutterBottom>
-            &nbsp;
+      <SectionDivider
+        heading="My Favorites"
+        subHeading="Here are your favorited meals"
+        backgroundColor="#2dce89"
+      />
+      <StyledContainer>
+        {favoritesList && favoritesList.length > 0 ? (
+          <Grid container spacing={6}>
+            {favoritesList.map((favorite, i) => (
+              <Grid item lg={3} md={4} xs={6} key={favorite.mealId}>
+                <AnimatedContainer index={i}>
+                  <CategoryItem
+                    {...favorite}
+                    linkToUrl={`/meal/${favorite.mealId}`}
+                  />
+                </AnimatedContainer>
+              </Grid>
+            ))}
+          </Grid>
+        ) : (
+          <Typography variant="h5">
+            You haven't added any favorites yet.
           </Typography>
-          <Typography variant="h4" gutterBottom>
-            What are you in the mood for tonight?
-          </Typography>
-        </Container>
-      </HeaderContainer>
+        )}
+      </StyledContainer>
+
+      <SectionDivider
+        heading="What are you in the mood for tonight?"
+        subHeading="Here you can find meals in various categories"
+      />
       <StyledContainer>
         <Grid container spacing={6}>
           {categories.map((category, i) => (
             <Grid item lg={3} md={4} xs={6} key={category.categoryId}>
               <AnimatedContainer index={i}>
-                <CategoryItem {...category} />
+                <CategoryItem
+                  {...category}
+                  linkToUrl={`/category/${category.name}`}
+                />
               </AnimatedContainer>
             </Grid>
           ))}

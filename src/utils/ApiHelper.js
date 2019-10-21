@@ -61,3 +61,19 @@ export const fetchRandomMeal = async count => {
     console.error(err.message);
   }
 };
+
+export const fetchFavorites = async mealIds => {
+  try {
+    const promises = mealIds.map(async mealId => {
+      const data = await axios(
+        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`
+      );
+      return data.data.meals[0];
+    });
+
+    const meals = await Promise.all(promises);
+    return parseMeals({ meals });
+  } catch (err) {
+    console.error(err.message);
+  }
+};

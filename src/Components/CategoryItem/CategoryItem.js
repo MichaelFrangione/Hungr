@@ -34,10 +34,10 @@ const Container = styled.div`
   }
 `;
 
-const CategoryItem = ({ name, thumbnail }) => {
+const CategoryItem = ({ name, thumbnail, linkToUrl }) => {
   return (
     <Container>
-      <Link to={`/category/${name}`}>
+      <Link to={linkToUrl}>
         <img src={thumbnail} alt={name} />
         <Typography variant="h4" gutterBottom>
           {name}

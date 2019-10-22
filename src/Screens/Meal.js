@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import IngredientsList from "Components/IngredientsList";
 import MealInfo from "Components/MealInfo";
 import AppHeader from "Components/AppHeader";
+import ErrorModal from "Components/ErrorModal/ErrorModal";
 
 const StyledContainer = styled(Container)`
   align-content: center;
@@ -27,7 +28,7 @@ const StyledMealInfo = styled(MealInfo)`
 `;
 
 const HeaderContainer = styled.div`
-  background: #2dce89;
+  background: ${({ theme }) => theme.green};
   padding: 50px 0 10px 0;
   margin-bottom: 60px;
   color: white;
@@ -40,17 +41,23 @@ const HeaderContainer = styled.div`
 
 const Meal = ({ mealId }) => {
   const [meal, setMeal] = useState(null);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchByMealId(mealId);
-      setMeal(data[0]);
+      try {
+        const data = await fetchByMealId(mealId);
+        setMeal(data[0]);
+      } catch (err) {
+        setHasError(true);
+      }
     };
     fetchData();
   }, [mealId]);
 
   return (
     <>
+      {hasError && <ErrorModal />}
       <AppHeader />
       <HeaderContainer>
         <Container>

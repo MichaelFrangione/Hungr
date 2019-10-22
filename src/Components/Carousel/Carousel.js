@@ -8,9 +8,20 @@ import "slick-carousel/slick/slick-theme.css";
 
 const StyledSlider = styled(Slider)`
   height: 600px;
+
+  .slick-prev {
+    left: 32px;
+    z-index: 1;
+  }
+  .slick-next {
+    right: 32px;
+    z-index: 1;
+  }
+
   .slick-slide {
     opacity: 0.3;
     transition: opacity 500ms ease-in-out;
+    cursor: grab;
 
     &.slick-active {
       opacity: 1;

@@ -15,6 +15,7 @@ import SectionDivider from "Components/SectionDivider";
 import { useStateValue } from "../Providers/StateProvider";
 import Header from "Components/Header";
 import MealInfo from "Components/MealInfo";
+import ErrorModal from "Components/ErrorModal/ErrorModal";
 
 const StyledContainer = styled(Container)`
   min-height: 150px;
@@ -32,18 +33,27 @@ const RandomRecipe = styled.div`
 const Home = () => {
   const [categories, setCategories] = useState(null);
   const [randomRecipes, setRandomRecipes] = useState(null);
+  const [hasError, setHasError] = useState(false);
   const [favoritesList, setfavoritesList] = useState(null);
   const [{ favorites }] = useStateValue();
 
   useEffect(() => {
     const fetchCategoryList = async () => {
-      const data = await fetchCategories();
-      setCategories(data);
+      try {
+        const data = await fetchCategories();
+        setCategories(data);
+      } catch (err) {
+        setHasError(true);
+      }
     };
 
     const fetchRandom = async () => {
-      const data = await fetchRandomMeal(3);
-      setRandomRecipes(data);
+      try {
+        const data = await fetchRandomMeal(3);
+        setRandomRecipes(data);
+      } catch (err) {
+        setHasError(true);
+      }
     };
 
     fetchRandom();
@@ -52,14 +62,19 @@ const Home = () => {
 
   useEffect(() => {
     const fetchFavoritesList = async () => {
-      const data = await fetchFavorites(favorites);
-      setfavoritesList(data);
+      try {
+        const data = await fetchFavorites(favorites);
+        setfavoritesList(data);
+      } catch (err) {
+        setHasError(true);
+      }
     };
     fetchFavoritesList();
   }, [favorites]);
 
   return (
     <>
+      {hasError && <ErrorModal />}
       <Header />
       <SectionDivider
         backgroundColor="#8965e0"

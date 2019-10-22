@@ -23,3 +23,7 @@ export const countryMappings = {
   Turkish: 792,
   Vietnamese: 704
 };
+
+export const actions = {
+  setFavorites: "SET_FAVORITES"
+};

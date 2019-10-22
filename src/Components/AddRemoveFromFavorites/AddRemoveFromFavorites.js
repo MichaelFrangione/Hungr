@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import Fab from "@material-ui/core/Fab";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -42,6 +43,15 @@ const AddRemoveFromFavorites = ({
       )}
     </StyledFab>
   );
+};
+
+AddRemoveFromFavorites.propTypes = {
+  /* Determines if it will show an Add or remove UI*/
+  isAdd: PropTypes.bool,
+  /* Call back to run on button click */
+  onClickHandler: PropTypes.func,
+  /* screen size to hide the text */
+  breakpoint: PropTypes.number
 };
 
 export default AddRemoveFromFavorites;

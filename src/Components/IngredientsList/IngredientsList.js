@@ -7,17 +7,16 @@ import { IngredientsType } from "Components/Types";
 const IngredientsContainer = styled.ul`
   list-style: none;
   padding-inline-start: 0px;
-  color: #9a9a9a;
+  color: ${({ theme }) => theme.ingredientsTextColor};
 
   li {
     padding: 8px 0;
-    border-bottom: 2px solid #f4f4f4;
+    border-bottom: 1px solid ${({ theme }) => theme.ingredientsTextColor};
   }
 
   span {
     font-weight: bold;
-    color: #000;
-  }
+    color: ${({ theme }) => theme.black};
 `;
 
 const Container = styled.div`

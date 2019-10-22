@@ -15,7 +15,7 @@ const StyledContainer = styled(Container)`
 `;
 
 const HeaderContainer = styled.div`
-  background: #2dce89;
+  background: ${({ theme }) => theme.green};
   min-height: 150px;
   padding-top: 64px;
   padding-bottom: 32px;

@@ -25,7 +25,7 @@ const StyledContainer = styled(Container)`
 `;
 
 const RandomRecipe = styled.div`
-  background: #172b4d;
+  background: ${({ theme }) => theme.recipeCardBackground};
   margin-bottom: 32px;
   overflow: hidden;
 `;

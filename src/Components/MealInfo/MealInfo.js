@@ -16,7 +16,7 @@ import AddRemoveFromFavorites from "Components/AddRemoveFromFavorites";
 const BREAKPOINT = 860;
 
 const MenuHeaderContainer = styled(Grid)`
-  background: #172b4d;
+  background: ${({ theme }) => theme.recipeCardBackground};
   display: flex !important;
   height: 600px;
 
@@ -33,7 +33,7 @@ const VideoContainer = styled.div`
 const MetadataContainer = styled.div`
   box-sizing: border-box;
   height: 100%;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
   text-align: left;
   padding: 32px;
   position: relative;
@@ -78,7 +78,7 @@ const StyledFlag = styled(Flag)`
 `;
 
 const Tag = styled.span`
-  color: #f5365c;
+  color: ${({ theme }) => theme.tagColor};
 `;
 
 const StyledButton = styled(Button)`

@@ -20,7 +20,7 @@ const NavContainer = styled.div`
 `;
 const StyledLocalPizzaIcon = styled(LocalPizzaIcon)`
   font-size: 4em !important;
-  color: #fb6340;
+  color: ${({ theme }) => theme.orangeRed};
 `;
 
 const AppHeader = () => {

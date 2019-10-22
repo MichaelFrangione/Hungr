@@ -11,6 +11,7 @@ export const parseCategories = resp => {
 };
 
 export const parseCategory = resp => {
+  if (!resp.meals) return null;
   return resp.meals.map(cat => {
     return {
       name: cat.strMeal,
@@ -21,6 +22,7 @@ export const parseCategory = resp => {
 };
 
 export const parseMeals = resp => {
+  if (!resp.meals) return null;
   return resp.meals.map(meal => {
     let ingredients = [];
     for (let i = 1; i <= 20; i++) {

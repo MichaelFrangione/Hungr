@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Typography from "@material-ui/core/Typography";
+import ErrorModal from "Components/ErrorModal";
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      return <Typography variant="h1">An error has occured.</Typography>;
+      return <ErrorModal />;
     }
 
     return this.props.children;

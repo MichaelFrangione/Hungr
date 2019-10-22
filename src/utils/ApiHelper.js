@@ -27,6 +27,8 @@ export const fetchByMealId = async mealId => {
   }
 };
 
+// MEALDB seems to be lacking the ability to bulk fetch random meals,
+// so individual calls for each meal have to be be made here.
 export const fetchRandomMeal = async count => {
   const promises = Array.from({ length: count }).map(async () => {
     const meals = await axios(
@@ -39,6 +41,8 @@ export const fetchRandomMeal = async count => {
   return parseMeals({ meals });
 };
 
+// MEALDB seems to be lacking the ability to bulk fetch meals by id,
+// so individual calls for each meal have to be be made here.
 export const fetchFavorites = async mealIds => {
   const promises = mealIds.map(async mealId => {
     const favorites = await axios(

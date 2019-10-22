@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
-import { getVideoId } from "../../utils/Youtube";
 import YouTube from "react-youtube";
 
 const Container = styled.div`
@@ -49,14 +48,12 @@ const YoutubeContainer = styled(YouTube)`
   height: 600px;
 `;
 
-const Video = ({ name, thumbnail, hideVideo, youtube }) => {
+const Video = ({ name, thumbnail, hideVideo, videoId }) => {
   const [showVideo, setShowVideo] = useState(false);
 
   if (hideVideo) {
     return <ImageOverlay src={thumbnail} alt={name} />;
   }
-
-  const videoId = getVideoId(youtube);
 
   return (
     <Container>

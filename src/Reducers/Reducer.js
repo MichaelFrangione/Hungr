@@ -10,12 +10,6 @@ const Reducer = (state, action) => {
         ...state,
         favorites: action.favorites
       };
-    case "error":
-      return {
-        ...state,
-        error: action.error
-      };
-
     default:
       return state;
   }

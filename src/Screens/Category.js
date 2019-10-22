@@ -6,6 +6,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import AnimatedContainer from "../Components/AnimatedContainer";
 import GridItem from "Components/GridItem";
+import AppHeader from "Components/AppHeader";
 
 const StyledContainer = styled(Container)`
   align-content: center;
@@ -42,6 +43,7 @@ const Category = ({ categoryName, description }) => {
 
   return (
     <>
+      <AppHeader />
       <HeaderContainer>
         <Container>
           <Typography variant="h4" gutterBottom>

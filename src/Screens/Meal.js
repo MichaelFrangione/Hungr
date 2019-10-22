@@ -6,6 +6,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import IngredientsList from "Components/IngredientsList";
 import MealInfo from "Components/MealInfo";
+import AppHeader from "Components/AppHeader";
 
 const StyledContainer = styled(Container)`
   align-content: center;
@@ -50,6 +51,7 @@ const Meal = ({ mealId }) => {
 
   return (
     <>
+      <AppHeader />
       <HeaderContainer>
         <Container>
           <Typography variant="h4" gutterBottom>

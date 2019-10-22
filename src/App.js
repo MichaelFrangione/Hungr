@@ -14,6 +14,9 @@ const GlobalStyle = createGlobalStyle`
   body {
   background: ${({ theme }) => theme.background};
   }
+  a {
+    text-decoration: none;
+  }
 `;
 
 function App() {

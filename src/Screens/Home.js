@@ -30,9 +30,9 @@ const RandomRecipe = styled.div`
 `;
 
 const Home = () => {
-  const [categories, setCategories] = useState([]);
-  const [randomRecipes, setRandomRecipes] = useState([]);
-  const [favoritesList, setfavoritesList] = useState([]);
+  const [categories, setCategories] = useState(null);
+  const [randomRecipes, setRandomRecipes] = useState(null);
+  const [favoritesList, setfavoritesList] = useState(null);
   const [{ favorites }] = useStateValue();
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const Home = () => {
       <SectionDivider
         backgroundColor="#8965e0"
         heading="Looking to try something new?"
-        subHeading="Heres a few of our most popular meals"
+        subHeading="Here's a few of our most popular meals"
       />
       {randomRecipes && (
         <RandomRecipe>
@@ -107,16 +107,17 @@ const Home = () => {
       />
       <StyledContainer>
         <Grid container spacing={6}>
-          {categories.map((category, i) => (
-            <Grid item lg={3} md={4} xs={6} key={category.categoryId}>
-              <AnimatedContainer index={i}>
-                <GridItem
-                  {...category}
-                  linkToUrl={`/category/${category.name}`}
-                />
-              </AnimatedContainer>
-            </Grid>
-          ))}
+          {categories &&
+            categories.map((category, i) => (
+              <Grid item lg={3} md={4} xs={6} key={category.categoryId}>
+                <AnimatedContainer index={i}>
+                  <GridItem
+                    {...category}
+                    linkToUrl={`/category/${category.name}`}
+                  />
+                </AnimatedContainer>
+              </Grid>
+            ))}
         </Grid>
       </StyledContainer>
     </>

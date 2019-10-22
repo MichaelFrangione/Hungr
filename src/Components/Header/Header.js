@@ -9,7 +9,7 @@ const AppHeader = styled.div`
 
   span {
     font-weight: bold;
-    color: #5e72e4;
+    color: ${({ theme }) => theme.primary};
   }
 `;
 

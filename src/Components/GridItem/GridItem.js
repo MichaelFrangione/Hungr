@@ -23,7 +23,7 @@ const Container = styled.div`
   h4 {
     width: 100%;
     text-align: center;
-    color: #525f7f;
+    color: ${({ theme }) => theme.gridItemTextColor};
     pointer-events: none;
   }
 

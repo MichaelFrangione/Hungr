@@ -3,77 +3,66 @@ import { parseCategories, parseCategory, parseMeals } from "./ApiParser";
 
 export const fetchCategories = async () => {
   try {
-    const data = await axios(
+    const categories = await axios(
       "https://www.themealdb.com/api/json/v1/1/categories.php"
     );
-    return parseCategories(data.data);
+    return parseCategories(categories.data);
   } catch (err) {
-    console.error(err.message);
+    throw new Error(err.message);
   }
 };
 
 export const fetchByCategory = async categoryName => {
   try {
-    const data = await axios(
+    const category = await axios(
       `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`
     );
-    return parseCategory(data.data);
+    return parseCategory(category.data);
   } catch (err) {
-    console.error(err.message);
-  }
-};
-
-export const fetchByTag = async categoryName => {
-  try {
-    const data = await axios(
-      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`
-    );
-    return parseCategory(data.data);
-  } catch (err) {
-    console.error(err.message);
+    throw new Error(err.message);
   }
 };
 
 export const fetchByMealId = async mealId => {
   try {
-    const data = await axios(
+    const meal = await axios(
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`
     );
 
-    return parseMeals(data.data);
+    return parseMeals(meal.data);
   } catch (err) {
-    console.error(err.message);
+    throw new Error(err.message);
   }
 };
 
 export const fetchRandomMeal = async count => {
   try {
     const promises = Array.from({ length: count }).map(async () => {
-      const data = await axios(
+      const meals = await axios(
         `https://www.themealdb.com/api/json/v1/1/random.php`
       );
-      return data.data.meals[0];
+      return meals.data.meals[0];
     });
 
     const meals = await Promise.all(promises);
     return parseMeals({ meals });
   } catch (err) {
-    console.error(err.message);
+    throw new Error(err.message);
   }
 };
 
 export const fetchFavorites = async mealIds => {
   try {
     const promises = mealIds.map(async mealId => {
-      const data = await axios(
+      const favorites = await axios(
         `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`
       );
-      return data.data.meals[0];
+      return favorites.data.meals[0];
     });
 
     const meals = await Promise.all(promises);
     return parseMeals({ meals });
   } catch (err) {
-    console.error(err.message);
+    throw new Error(err.message);
   }
 };

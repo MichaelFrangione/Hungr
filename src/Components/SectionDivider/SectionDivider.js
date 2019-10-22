@@ -9,8 +9,8 @@ const HeaderContainer = styled.div`
   height: 150px;
   flex-direction: column;
   justify-content: flex-end;
-  background: ${({ backgroundColor }) =>
-    backgroundColor ? `${backgroundColor}` : "#5e72e4"};
+  background: ${({ theme, backgroundColor }) =>
+    backgroundColor ? `${backgroundColor}` : theme.primary};
   padding-bottom: 10px;
   margin-bottom: 32px;
   color: white;

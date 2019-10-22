@@ -12,6 +12,7 @@ const Flag = ({ country, ...others }) => {
     <WorldFlag
       code={COUNTRY_MAPPINGS[country]}
       fallback={<span>{country}</span>}
+      title={country}
       {...others}
     />
   );

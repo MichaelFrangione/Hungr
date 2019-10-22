@@ -6,13 +6,12 @@ import Grid from "@material-ui/core/Grid";
 import Video from "Components/Video/Video";
 import Flag from "Components/Flag";
 import { Link } from "react-router-dom";
-import Fab from "@material-ui/core/Fab";
 import Button from "@material-ui/core/Button";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+
 import { useStateValue } from "../../Providers/StateProvider";
 import { addFavorite, removeFavorite } from "../../utils/Middlewares";
 import { MealItemType } from "Components/Types";
+import AddRemoveFromFavorites from "Components/AddRemoveFromFavorites";
 
 const BREAKPOINT = 860;
 
@@ -97,11 +96,10 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const StyledFab = styled(Fab)`
+const StyledAddRemoveFromFavorites = styled(AddRemoveFromFavorites)`
   position: absolute !important;
   bottom: 32px;
   right: 32px;
-  text-transform: none !important;
 `;
 
 const MealInfo = ({ meal, isCarousel, ...others }) => {
@@ -146,28 +144,16 @@ const MealInfo = ({ meal, isCarousel, ...others }) => {
                 <Typography variant="h4">View Recipe</Typography>
               </Link>
             </StyledButton>
-          ) : !isFavorited ? (
-            <StyledFab
-              variant="extended"
-              color="secondary"
-              onClick={() => addFavorite(meal.mealId, state, dispatch)}
-            >
-              <FavoriteBorderIcon />
-              <Typography variant="h5">
-                {window.innerWidth >= BREAKPOINT && ` Add to Favorites`}
-              </Typography>
-            </StyledFab>
           ) : (
-            <StyledFab
-              variant="extended"
-              color="secondary"
-              onClick={() => removeFavorite(meal.mealId, state, dispatch)}
-            >
-              <FavoriteIcon />
-              <Typography variant="h5">
-                {window.innerWidth >= BREAKPOINT && ` Remove from Favorites`}
-              </Typography>
-            </StyledFab>
+            <StyledAddRemoveFromFavorites
+              isAdd={!isFavorited}
+              breakpoint={BREAKPOINT}
+              onClickHandler={() =>
+                isFavorited
+                  ? removeFavorite(meal.mealId, state, dispatch)
+                  : addFavorite(meal.mealId, state, dispatch)
+              }
+            />
           )}
         </MetadataContainer>
       </Grid>

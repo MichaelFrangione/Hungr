@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { fetchByCategory } from "../utils/ApiHelper";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -15,9 +14,14 @@ const StyledContainer = styled(Container)`
 
 const HeaderContainer = styled.div`
   background: #2dce89;
-  padding: 50px 0 10px 0;
+  min-height: 150px;
+  padding-top: 64px;
+  padding-bottom: 32px;
   margin-bottom: 60px;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 
   a {
     text-decoration: none;

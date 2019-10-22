@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { fetchByMealId } from "../utils/ApiHelper";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";

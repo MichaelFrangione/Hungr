@@ -1,4 +1,5 @@
 export const parseCategories = resp => {
+  if (!resp.categories) return null;
   return resp.categories.map(cat => {
     return {
       categoryId: cat.idCategory,
@@ -38,7 +39,7 @@ export const parseMeals = resp => {
       country: meal.strArea,
       instructions: meal.strInstructions,
       thumbnail: meal.strMealThumb,
-      tags: parseTags(meal.strTags), // TODO: convert to array of tags
+      tags: parseTags(meal.strTags),
       youtube: meal.strYoutube
     };
   });

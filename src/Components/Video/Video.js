@@ -39,7 +39,7 @@ const PlayButtonFill = styled.div`
   transform: translate(-50%, -50%);
   width: 50px;
   height: 50px;
-  background: ${({ theme }) => theme.black};
+  background: ${({ theme }) => theme.white};
   z-index: -1;
 `;
 

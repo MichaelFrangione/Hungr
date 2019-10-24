@@ -4,12 +4,12 @@ import {
   fetchRandomMeal,
   fetchFavorites
 } from "../utils/ApiHelper";
-import { useStateValue } from "./StateProvider";
+import { useStateValue } from "../Providers/StateProvider";
 import Home from "../Screens/Home";
 import ErrorModal from "Components/ErrorModal/ErrorModal";
 import { saveCategoriesResponse } from "../utils/Middlewares";
 
-const HomeProvider = () => {
+const HomeContainer = () => {
   const [{ favorites, api }, dispatch] = useStateValue();
   const [categories, setCategories] = useState(api.categories);
   const [randomRecipes, setRandomRecipes] = useState(null);
@@ -42,8 +42,6 @@ const HomeProvider = () => {
     }
   }, [api, dispatch]);
 
-  console.log(api.categories);
-
   useEffect(() => {
     const fetchFavoritesList = async () => {
       try {
@@ -69,4 +67,4 @@ const HomeProvider = () => {
   );
 };
 
-export default HomeProvider;
+export default HomeContainer;

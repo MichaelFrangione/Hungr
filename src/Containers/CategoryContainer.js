@@ -3,7 +3,7 @@ import { fetchByCategory } from "../utils/ApiHelper";
 import ErrorModal from "Components/ErrorModal/ErrorModal";
 import Category from "Screens/Category";
 
-const CategoryProvider = ({ categoryName, description }) => {
+const CategoryContainer = ({ categoryName, description }) => {
   const [meals, setMeals] = useState([]);
   const [hasError, setHasError] = useState(false);
 
@@ -31,4 +31,4 @@ const CategoryProvider = ({ categoryName, description }) => {
   );
 };
 
-export default CategoryProvider;
+export default CategoryContainer;

@@ -3,7 +3,7 @@ import { fetchByMealId } from "../utils/ApiHelper";
 import ErrorModal from "Components/ErrorModal/ErrorModal";
 import Meal from "Screens/Meal";
 
-const MealProvider = ({ mealId }) => {
+const MealContainer = ({ mealId }) => {
   const [meal, setMeal] = useState(null);
   const [hasError, setHasError] = useState(false);
 
@@ -27,4 +27,4 @@ const MealProvider = ({ mealId }) => {
   );
 };
 
-export default MealProvider;
+export default MealContainer;

@@ -6,9 +6,9 @@ import reducer from "./Reducers";
 import "./App.css";
 import ErrorBoundary from "Components/ErrorBoundry/ErrorBoundry";
 import theme from "./Themes/Theme";
-import HomeProvider from "Providers/HomeProvider";
-import CategoryProvider from "Providers/CategoryProvider";
-import MealProvider from "Providers/MealProvider";
+import HomeContainer from "Containers/HomeContainer";
+import CategoryContainer from "Containers/CategoryContainer";
+import MealContainer from "Containers/MealContainer";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -36,7 +36,7 @@ function App() {
                 path="/category/:id"
                 render={props => {
                   return (
-                    <CategoryProvider
+                    <CategoryContainer
                       categoryName={props.match.params.id}
                       description={props.location.state.description}
                     />
@@ -46,11 +46,11 @@ function App() {
               <Route
                 path="/meal/:id"
                 render={props => (
-                  <MealProvider mealId={props.match.params.id} />
+                  <MealContainer mealId={props.match.params.id} />
                 )}
               />
               <Route path="/">
-                <HomeProvider />
+                <HomeContainer />
               </Route>
             </Switch>
           </Router>

@@ -1,14 +1,14 @@
 import React from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./Screens/Home";
-import Category from "Screens/Category";
-import Meal from "Screens/Meal";
 import { StateProvider } from "Providers/StateProvider";
 import reducer from "./Reducers";
 import "./App.css";
 import ErrorBoundary from "Components/ErrorBoundry/ErrorBoundry";
 import theme from "./Themes/Theme";
+import HomeProvider from "Providers/HomeProvider";
+import CategoryProvider from "Providers/CategoryProvider";
+import MealProvider from "Providers/MealProvider";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -35,7 +35,7 @@ function App() {
                 path="/category/:id"
                 render={props => {
                   return (
-                    <Category
+                    <CategoryProvider
                       categoryName={props.match.params.id}
                       description={props.location.state.description}
                     />
@@ -44,10 +44,12 @@ function App() {
               />
               <Route
                 path="/meal/:id"
-                render={props => <Meal mealId={props.match.params.id} />}
+                render={props => (
+                  <MealProvider mealId={props.match.params.id} />
+                )}
               />
               <Route path="/">
-                <Home />
+                <HomeProvider />
               </Route>
             </Switch>
           </Router>

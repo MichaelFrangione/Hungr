@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import GridItem from "../Components/GridItem";
-import {
-  fetchCategories,
-  fetchRandomMeal,
-  fetchFavorites
-} from "../utils/ApiHelper";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import AnimatedContainer from "../Components/AnimatedContainer";
 import Carousel from "Components/Carousel";
 import SectionDivider from "Components/SectionDivider";
-import { useStateValue } from "../Providers/StateProvider";
 import Header from "Components/Header";
 import MealInfo from "Components/MealInfo";
-import ErrorModal from "Components/ErrorModal/ErrorModal";
 
 const StyledContainer = styled(Container)`
   min-height: 150px;
@@ -30,51 +23,9 @@ const RandomRecipe = styled.div`
   overflow: hidden;
 `;
 
-const Home = () => {
-  const [categories, setCategories] = useState(null);
-  const [randomRecipes, setRandomRecipes] = useState(null);
-  const [hasError, setHasError] = useState(false);
-  const [favoritesList, setfavoritesList] = useState(null);
-  const [{ favorites }] = useStateValue();
-
-  useEffect(() => {
-    const fetchCategoryList = async () => {
-      try {
-        const data = await fetchCategories();
-        setCategories(data);
-      } catch (err) {
-        setHasError(true);
-      }
-    };
-
-    const fetchRandom = async () => {
-      try {
-        const data = await fetchRandomMeal(3);
-        setRandomRecipes(data);
-      } catch (err) {
-        setHasError(true);
-      }
-    };
-
-    fetchRandom();
-    fetchCategoryList();
-  }, []);
-
-  useEffect(() => {
-    const fetchFavoritesList = async () => {
-      try {
-        const data = await fetchFavorites(favorites);
-        setfavoritesList(data);
-      } catch (err) {
-        setHasError(true);
-      }
-    };
-    fetchFavoritesList();
-  }, [favorites]);
-
+const Home = ({ categories, favorites, randomRecipes }) => {
   return (
     <>
-      {hasError && <ErrorModal />}
       <Header />
       <SectionDivider
         backgroundColor="#8965e0"
@@ -96,9 +47,9 @@ const Home = () => {
         backgroundColor="#2dce89"
       />
       <StyledContainer>
-        {favoritesList && favoritesList.length > 0 ? (
+        {favorites && favorites.length > 0 ? (
           <Grid container spacing={6}>
-            {favoritesList.map((favorite, i) => (
+            {favorites.map((favorite, i) => (
               <Grid item lg={3} md={4} xs={6} key={favorite.mealId}>
                 <AnimatedContainer index={i}>
                   <GridItem

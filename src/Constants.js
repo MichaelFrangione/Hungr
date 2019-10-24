@@ -25,5 +25,6 @@ export const countryMappings = {
 };
 
 export const actions = {
-  setFavorites: "SET_FAVORITES"
+  setFavorites: "SET_FAVORITES",
+  setCategories: "SET_CATEGORIES"
 };

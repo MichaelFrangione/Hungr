@@ -7,19 +7,21 @@ import {
 import { useStateValue } from "./StateProvider";
 import Home from "../Screens/Home";
 import ErrorModal from "Components/ErrorModal/ErrorModal";
+import { saveCategoriesResponse } from "../utils/Middlewares";
 
 const HomeProvider = () => {
-  const [categories, setCategories] = useState(null);
+  const [{ favorites, api }, dispatch] = useStateValue();
+  const [categories, setCategories] = useState(api.categories);
   const [randomRecipes, setRandomRecipes] = useState(null);
   const [hasError, setHasError] = useState(false);
   const [favoritesList, setfavoritesList] = useState(null);
-  const [{ favorites }] = useStateValue();
 
   useEffect(() => {
     const fetchCategoryList = async () => {
       try {
         const data = await fetchCategories();
         setCategories(data);
+        saveCategoriesResponse(data, api, dispatch);
       } catch (err) {
         setHasError(true);
       }
@@ -35,8 +37,12 @@ const HomeProvider = () => {
     };
 
     fetchRandom();
-    fetchCategoryList();
-  }, []);
+    if (!api.categories) {
+      fetchCategoryList();
+    }
+  }, [api, dispatch]);
+
+  console.log(api.categories);
 
   useEffect(() => {
     const fetchFavoritesList = async () => {

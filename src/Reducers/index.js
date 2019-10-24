@@ -1,3 +1,9 @@
-import Reducer from "./Reducer";
+import favortiesReducer from "./favorites";
+import apiReducer from "./api";
 
-export default Reducer;
+const mainReducer = ({ favorites, api }, action) => ({
+  favorites: favortiesReducer(favorites, action),
+  api: apiReducer(api, action)
+});
+
+export default mainReducer;

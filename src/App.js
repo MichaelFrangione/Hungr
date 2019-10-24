@@ -21,7 +21,8 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   const initialState = {
-    favorites: JSON.parse(localStorage.getItem("favorites")) || []
+    favorites: JSON.parse(localStorage.getItem("favorites")) || [],
+    api: {}
   };
 
   return (

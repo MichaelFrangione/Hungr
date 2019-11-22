@@ -17,6 +17,7 @@ const IngredientsContainer = styled.ul`
   span {
     font-weight: bold;
     color: ${({ theme }) => theme.black};
+  }
 `;
 
 const Container = styled.div`

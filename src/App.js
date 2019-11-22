@@ -1,14 +1,14 @@
 import React from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./Screens/Home";
-import Category from "Screens/Category";
-import Meal from "Screens/Meal";
 import { StateProvider } from "Providers/StateProvider";
 import reducer from "./Reducers";
 import "./App.css";
 import ErrorBoundary from "Components/ErrorBoundry/ErrorBoundry";
 import theme from "./Themes/Theme";
+import HomeContainer from "Containers/HomeContainer";
+import CategoryContainer from "Containers/CategoryContainer";
+import MealContainer from "Containers/MealContainer";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -21,7 +21,8 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   const initialState = {
-    favorites: JSON.parse(localStorage.getItem("favorites")) || []
+    favorites: JSON.parse(localStorage.getItem("favorites")) || [],
+    api: {}
   };
 
   return (
@@ -35,7 +36,7 @@ function App() {
                 path="/category/:id"
                 render={props => {
                   return (
-                    <Category
+                    <CategoryContainer
                       categoryName={props.match.params.id}
                       description={props.location.state.description}
                     />
@@ -44,10 +45,12 @@ function App() {
               />
               <Route
                 path="/meal/:id"
-                render={props => <Meal mealId={props.match.params.id} />}
+                render={props => (
+                  <MealContainer mealId={props.match.params.id} />
+                )}
               />
               <Route path="/">
-                <Home />
+                <HomeContainer />
               </Route>
             </Switch>
           </Router>

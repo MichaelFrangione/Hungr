@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { fetchByCategory } from "../utils/ApiHelper";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import AnimatedContainer from "../Components/AnimatedContainer";
 import GridItem from "Components/GridItem";
 import AppHeader from "Components/AppHeader";
-import ErrorModal from "Components/ErrorModal/ErrorModal";
 
 const StyledContainer = styled(Container)`
   align-content: center;
@@ -31,25 +29,9 @@ const HeaderContainer = styled.div`
   }
 `;
 
-const Category = ({ categoryName, description }) => {
-  const [meals, setMeals] = useState([]);
-  const [hasError, setHasError] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchByCategory(categoryName);
-        setMeals(data);
-      } catch (err) {
-        setHasError(true);
-      }
-    };
-    fetchData();
-  }, [categoryName]);
-
+const Category = ({ meals, description, categoryName }) => {
   return (
     <>
-      {hasError && <ErrorModal />}
       <AppHeader />
       <HeaderContainer>
         <Container>

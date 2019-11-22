@@ -33,3 +33,15 @@ export const removeFavorite = (mealId, state, dispatch) => {
     favorites
   });
 };
+
+/**
+ * @param  {array} categories, an array of categories to cache on the state.
+ * @param  {Object} state current state from useReducer() hook
+ * @param  {function} dispatch dispatcher from useReducer() hook
+ */
+export const saveCategoriesResponse = (categories, state, dispatch) => {
+  dispatch({
+    type: actions.setCategories,
+    categories
+  });
+};

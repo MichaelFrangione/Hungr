@@ -1,15 +1,15 @@
 import { actions } from "../Constants";
 
-const Reducer = (state, action) => {
+const Api = (state, action) => {
   switch (action.type) {
-    case actions.setFavorites:
+    case actions.setCategories:
       return {
         ...state,
-        favorites: action.favorites
+        categories: action.categories
       };
     default:
       return state;
   }
 };
 
-export default Reducer;
+export default Api;

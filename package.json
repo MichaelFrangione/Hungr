@@ -1,6 +1,6 @@
 {
   "name": "Hungr",
-  "homepage: "https://michaelfrangione.github.io/Hungr",
+  "homepage": "https://michaelfrangione.github.io/Hungr",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

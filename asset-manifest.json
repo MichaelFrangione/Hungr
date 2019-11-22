@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/Hungr/static/css/main.b100e6da.chunk.css",
+    "main.js": "/Hungr/static/js/main.9c00ae37.chunk.js",
+    "main.js.map": "/Hungr/static/js/main.9c00ae37.chunk.js.map",
+    "runtime-main.js": "/Hungr/static/js/runtime-main.a999d14e.js",
+    "runtime-main.js.map": "/Hungr/static/js/runtime-main.a999d14e.js.map",
+    "static/css/2.d674b600.chunk.css": "/Hungr/static/css/2.d674b600.chunk.css",
+    "static/js/2.2235343b.chunk.js": "/Hungr/static/js/2.2235343b.chunk.js",
+    "static/js/2.2235343b.chunk.js.map": "/Hungr/static/js/2.2235343b.chunk.js.map",
+    "index.html": "/Hungr/index.html",
+    "precache-manifest.355e7d9d332b06dd5208e14bcee932b7.js": "/Hungr/precache-manifest.355e7d9d332b06dd5208e14bcee932b7.js",
+    "service-worker.js": "/Hungr/service-worker.js",
+    "static/css/2.d674b600.chunk.css.map": "/Hungr/static/css/2.d674b600.chunk.css.map",
+    "static/css/main.b100e6da.chunk.css.map": "/Hungr/static/css/main.b100e6da.chunk.css.map",
+    "static/media/slick-theme.css": "/Hungr/static/media/slick.f97e3bbf.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a999d14e.js",
+    "static/css/2.d674b600.chunk.css",
+    "static/js/2.2235343b.chunk.js",
+    "static/css/main.b100e6da.chunk.css",
+    "static/js/main.9c00ae37.chunk.js"
+  ]
+}
